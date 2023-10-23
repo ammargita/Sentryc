@@ -1,0 +1,95 @@
+----------------------------------------------------------------market_places------------------------------------------------
+BEGIN
+    DECLARE numRows INT;
+    DECLARE i INT;
+    DECLARE description VARCHAR(255); 
+
+    SET numRows = 1000;
+    SET i = 1;
+   	SET description = "Test";  -- Initial value
+
+    -- Start a transaction (optional, but recommended for multiple inserts)
+    START TRANSACTION;
+
+    WHILE i <= numRows DO
+        INSERT INTO market_places(id,description) VALUES (i,description);
+        SET i = i + 1;
+    	SET description = CONCAT("Test - ", i);
+    END WHILE;
+    -- Commit the transaction (optional if you started a transaction)
+	 COMMIT;
+END	
+--------------------------------------------------------------producers-----------------------------------------------------------	
+
+BEGIN
+    DECLARE numRows INT;
+    DECLARE i INT;
+    DECLARE name VARCHAR(255); 
+
+    SET numRows = 1000;
+    SET i = 1;
+   	SET name = "Test";  -- Initial value
+
+    -- Start a transaction (optional, but recommended for multiple inserts)
+    START TRANSACTION;
+
+    WHILE i <= numRows DO
+        INSERT INTO producers(id, created_at,name) VALUES (i,"2023-10-23",name);
+        SET i = i + 1;
+    	SET name = CONCAT("Test - ", i);
+    END WHILE;
+    -- Commit the transaction (optional if you started a transaction)
+	 COMMIT;
+END	
+-----------------------------------------------------------seller_infos---------------------------------------------------------------------
+
+BEGIN
+    DECLARE numRows INT;
+    DECLARE i INT;
+    DECLARE country VARCHAR(255);  -- Assuming "name" is a VARCHAR column
+	DECLARE external_id VARCHAR(255);
+    DECLARE name VARCHAR(255);
+    DECLARE url VARCHAR(255);
+
+    SET numRows = 1000;
+    SET i = 1;
+   	SET country = "India";  -- Initial value
+    SET external_id = "External";  -- Initial value
+    SET name = "Test";  -- Initial value
+    SET url = "http://localhost/phpmyadmin/";  -- Initial value
+    -- Start a transaction (optional, but recommended for multiple inserts)
+    START TRANSACTION;
+
+    WHILE i <= numRows DO
+        INSERT INTO seller_infos(id, country,external_id,name,url,market_places_id) VALUES (i, country,external_id,name,url,1);
+        SET i = i + 1;
+        SET external_id = CONCAT("External - ", i);  -- Increment the value
+        SET name = CONCAT("Test - ", i);  -- Increment the value
+        SET url = CONCAT("http://localhost/phpmyadmin/", i);  -- Increment the value
+    END WHILE;
+    -- Commit the transaction (optional if you started a transaction)
+    COMMIT;
+END	
+
+-------------------------------------------------------sellers--------------------------------------------------------------------------------
+
+BEGIN
+    DECLARE numRows INT;
+    DECLARE i INT;
+    DECLARE state VARCHAR(255); 
+
+    SET numRows = 1000;
+    SET i = 1;
+   	SET state = "WHITELISTED";  -- Initial value
+
+    -- Start a transaction (optional, but recommended for multiple inserts)
+    START TRANSACTION;
+
+    WHILE i <= numRows DO
+        INSERT INTO sellers(id, producers_id,seller_infos_id,state) VALUES (i, i,i,state);
+        SET i = i + 1;
+
+    END WHILE;
+    -- Commit the transaction (optional if you started a transaction)
+    COMMIT;
+END
