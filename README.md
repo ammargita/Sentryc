@@ -23,3 +23,4 @@ Project structure for Sentryc Java Project.
 11. GraphQLs test cases are captured in test package "GraphQLSellerInfosControllerTest". 
 12. In order to insert test records, I have provided stored procedures, these procedure can be inserted in MySQL database and can be executed to create test records. Before inserting these stored procedure, you can make changes according to your requirements.
 13. Name of the file stored_procedure.txt which contains script to create 1000 dummy records for 4 tables.
+Note: We have used JPQL query to fetch the response, and not native queries.
